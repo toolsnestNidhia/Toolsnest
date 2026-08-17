@@ -1,1 +1,638 @@
+/* =========================================
+   ToolNest Age Calculator
+   ========================================= */
 
+* {
+    box-sizing: border-box;
+}
+
+
+:root {
+    --background: #f5f7fb;
+    --surface: #ffffff;
+    --text: #202124;
+    --muted: #68707d;
+    --border: #dfe3ea;
+    --primary: #3157d5;
+    --primary-dark: #2444ad;
+    --primary-light: #eef2ff;
+    --success: #16834b;
+    --error: #c62828;
+    --shadow: 0 10px 35px rgba(31, 42, 68, 0.08);
+}
+
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    line-height: 1.6;
+}
+
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================================
+   Page
+   ========================================= */
+
+.page {
+    width: min(100% - 32px, 960px);
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   Header
+   ========================================= */
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 24px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.brand {
+    color: var(--text);
+    text-decoration: none;
+
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+
+.brand-tagline {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================
+   Hero
+   ========================================= */
+
+.hero {
+    max-width: 720px;
+    margin: 70px auto 40px;
+    text-align: center;
+}
+
+
+.eyebrow {
+    margin: 0 0 12px;
+
+    color: var(--primary);
+
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+
+.hero h1 {
+    margin: 0;
+
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+}
+
+
+.hero-text {
+    max-width: 620px;
+    margin: 20px auto 0;
+
+    color: var(--muted);
+    font-size: 1.08rem;
+}
+
+
+/* =========================================
+   Calculator card
+   ========================================= */
+
+.calculator-card,
+.result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+
+.calculator-card {
+    padding: clamp(24px, 5vw, 42px);
+}
+
+
+.card-heading {
+    margin-bottom: 28px;
+}
+
+
+.card-heading h2 {
+    margin: 0 0 6px;
+
+    font-size: 1.5rem;
+}
+
+
+.card-heading p {
+    margin: 0;
+
+    color: var(--muted);
+}
+
+
+/* =========================================
+   Form
+   ========================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 700;
+}
+
+
+.form-group small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+
+input[type="date"] {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    background: #fff;
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+input[type="date"]:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(49, 87, 213, 0.12);
+}
+
+
+/* =========================================
+   Buttons
+   ========================================= */
+
+.primary-button,
+.secondary-button {
+    border: 0;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.primary-button {
+    width: 100%;
+
+    margin-top: 26px;
+    padding: 15px 20px;
+
+    background: var(--primary);
+    color: white;
+
+    box-shadow:
+        0 5px 15px rgba(49, 87, 213, 0.2);
+}
+
+
+.primary-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+
+.primary-button:active,
+.secondary-button:active {
+    transform: translateY(0);
+}
+
+
+.secondary-button {
+    padding: 11px 20px;
+
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+
+.secondary-button:hover {
+    background: #e2e8ff;
+}
+
+
+/* =========================================
+   Error
+   ========================================= */
+
+.error-message {
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    background: #fff0f0;
+    color: var(--error);
+
+    border-radius: 10px;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   Results
+   ========================================= */
+
+.result-section {
+    margin-top: 28px;
+}
+
+
+.result-card {
+    padding: clamp(24px, 5vw, 40px);
+}
+
+
+.result-label {
+    margin: 0;
+
+    color: var(--primary);
+
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+
+.exact-age {
+    margin: 8px 0;
+}
+
+
+#exactAge {
+    margin: 8px 0 4px;
+
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+
+
+.age-in-words {
+    margin: 0;
+
+    color: var(--muted);
+}
+
+
+.result-divider {
+    height: 1px;
+
+    margin: 28px 0;
+
+    background: var(--border);
+}
+
+
+/* =========================================
+   Statistics
+   ========================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+
+.stat {
+    padding: 18px 12px;
+
+    background: var(--background);
+
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+
+.stat strong {
+    display: block;
+
+    font-size: 1.35rem;
+}
+
+
+.stat span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 0.78rem;
+}
+
+
+/* =========================================
+   Birthday
+   ========================================= */
+
+.birthday-card {
+    margin-top: 20px;
+}
+
+
+.birthday-card h3 {
+    margin: 0 0 20px;
+
+    font-size: 1.25rem;
+}
+
+
+.birthday-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+
+.info-item {
+    padding: 18px;
+
+    background: var(--background);
+
+    border-radius: 12px;
+}
+
+
+.info-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+}
+
+
+.info-item strong {
+    font-size: 1rem;
+}
+
+
+/* =========================================
+   Copy
+   ========================================= */
+
+.copy-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+
+.copy-message {
+    color: var(--success);
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   Information section
+   ========================================= */
+
+.information {
+    margin: 70px 0;
+}
+
+
+.information > h2 {
+    margin-bottom: 12px;
+
+    font-size: 1.8rem;
+}
+
+
+.information > p {
+    max-width: 760px;
+
+    color: var(--muted);
+}
+
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 28px;
+}
+
+
+.feature {
+    padding: 24px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    margin-bottom: 18px;
+
+    background: var(--primary-light);
+    color: var(--primary);
+
+    border-radius: 10px;
+
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+
+.feature h3 {
+    margin: 0 0 8px;
+
+    font-size: 1.05rem;
+}
+
+
+.feature p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   Footer
+   ========================================= */
+
+.footer {
+    padding: 30px 0 50px;
+
+    color: var(--muted);
+
+    border-top: 1px solid var(--border);
+
+    text-align: center;
+
+    font-size: 0.85rem;
+}
+
+
+.footer p {
+    margin: 4px 0;
+}
+
+
+/* =========================================
+   Mobile
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .site-header {
+        align-items: flex-start;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+
+    .brand-tagline {
+        font-size: 0.8rem;
+    }
+
+
+    .hero {
+        margin-top: 45px;
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .birthday-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .copy-area {
+        flex-direction: column;
+    }
+
+
+    .secondary-button {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .page {
+        width: min(100% - 20px, 960px);
+    }
+
+
+    .calculator-card,
+    .result-card {
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+}
